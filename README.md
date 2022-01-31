@@ -18,5 +18,5 @@ Monolith
 2 tier  
 (breaking it down into smaller things with AWS)
 
-Microservices
+Microservices  
 (Separating it into even smaller things for improved uptime, and easier updating)
