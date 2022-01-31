@@ -10,12 +10,12 @@
 - Cost - Cost Effective (minimising cost by automating, CI/CD etc..)
 
 ### Monolith, 2 tier and Microservices Architectures
-Monolith
-(One box that has the front end, back end, database)
-(Everytime you add a feature, you have to restart the entire program)
-(Uptime, responce time, etc..)
+Monolith  
+(One box that has the front end, back end, database)  
+(Everytime you add a feature, you have to restart the entire program)  
+(Uptime, responce time, etc..)  
 
-2 tier
+2 tier  
 (breaking it down into smaller things with AWS)
 
 Microservices
