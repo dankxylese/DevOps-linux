@@ -20,3 +20,22 @@ Monolith
 
 Microservices  
 (Separating it into even smaller things for improved uptime, and easier updating)
+
+
+## Installing Vagrant
+
+Download [Normal installers for] Vagrant, VirtualBox, Ruby one-click installer  
+Make a folder for Vagrant. Inside of the folder make a "vagrantfile" file, without extensions.
+Inside of it, add:  
+  
+```
+Vagrant.configure("2") do |config|  
+config.vm.box = "ubuntu/xenial64"  
+end  
+```
+
+Then, launch gitbash in the same folder as "vagrantfile"
+And do "vagrant up" command to start downloading Ubuntu.
+
+Once its up, do "vagrant ssh", and use logout to leave VM
+"vagrant halt" stops the vm
