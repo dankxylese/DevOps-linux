@@ -24,7 +24,7 @@ Microservices
 
 ## Installing Vagrant
 
-Download [Normal installers for] Vagrant, VirtualBox, Ruby one-click installer  
+Download [Normal installers for] Vagrant, VirtualBox, Ruby one-click installer, install them  
 Make a folder for Vagrant. Inside of the folder make a "vagrantfile" file, without extensions.
 Inside of it, add:  
   
