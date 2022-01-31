@@ -25,17 +25,29 @@ Microservices
 ## Installing Vagrant
 
 Download [Normal installers for] Vagrant, VirtualBox, Ruby one-click installer, install them  
-Make a folder for Vagrant. Inside of the folder make a "vagrantfile" file, without extensions.
+Make a folder for Vagrant. Inside of the folder make a "vagrantfile" file, without extensions.  
 Inside of it, add:  
   
 ```
-Vagrant.configure("2") do |config|  
-config.vm.box = "ubuntu/xenial64"  
-end  
+$script = <<-'SCRIPT'
+apt-get update -y
+apt-get upgrade -y
+apt-get install -y nginx
+SCRIPT
+
+Vagrant.configure("2") do |config|
+ config.vm.box = "ubuntu/xenial64"
+# creating a virtual machine ubuntu 
+ config.vm.network "private_network", ip: "192.168.10.100"
+ config.vm.provision "shell", inline: $script
+end
 ```
 
 Then, launch gitbash in the same folder as "vagrantfile"
-And do "vagrant up" command to start downloading Ubuntu.
-
-Once its up, do "vagrant ssh", and use logout to leave VM
-"vagrant halt" stops the vm
+And do "vagrant up" command to start downloading Ubuntu.  
+  
+This will install virtualbox, set up a local ip you can reach with your browser for nginx,  
+and then run the script which updates the vm and installs nginx  
+  
+Once its up, do "vagrant ssh", and use logout to leave VM  
+"vagrant halt" stops the vm  
