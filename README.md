@@ -44,10 +44,28 @@ end
 ```
 
 Then, launch gitbash in the same folder as "vagrantfile"
-And do "vagrant up" command to start downloading Ubuntu.  
+And do `vagrant up` command to start downloading Ubuntu.  
   
 This will install virtualbox, set up a local ip you can reach with your browser for nginx,  
 and then run the script which updates the vm and installs nginx  
   
-Once its up, do "vagrant ssh", and use logout to leave VM  
-"vagrant halt" stops the vm.  
+Once its up, do `vagrant ssh`, and use logout to leave VM  
+`vagrant halt` stops the vm.  
+
+### Linux basics
+
+- Name of the machine and details `uname -a`
+- Working directory `pwd`
+- Show all files `ls -a`
+- Create a directory `mkdir`
+- Change directory `cd`
+- Make a file `touch <file>` or `nano <file>`
+- Print file `cat <file>`
+- Remove file `rm <file>`
+- Recursively remove a directory `rm -rf <directory>`
+- Copying a file `cp <origin-file&location> <final-file or location>`
+- Moving or renaming `mv <origin-file&location> <final file (and or name)>`
+
+
+
+
