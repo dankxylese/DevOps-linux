@@ -1,17 +1,21 @@
-$script = <<-'SCRIPT'
-apt-get update -y
-apt-get upgrade -y
-apt-get install -y nginx
-SCRIPT
+# $script = <<-'SCRIPT'
+# apt-get update -y
+# apt-get upgrade -y
+# apt-get install -y nginx
+# apt-get install -y npm
+# apt-get install -y nodejs
+# apt-get install -y rake
+# SCRIPT
 
 
 Vagrant.configure("2") do |config|
 
  config.vm.box = "ubuntu/xenial64"
 # creating a virtual machine ubuntu 
- config.vm.network "forwarded_port", guest: 80, host: 8080, id: "nginx"
+# config.vm.network "forwarded_port", guest: 80, host: 8080, id: "nginx"
+ config.vm.network "private_network", ip: "192.168.56.4"
  config.vm.synced_folder "src/", "/home/vagrant/code"
 # config.vm.provision "shell", inline: $script
- config.vm.provision "shell", path: "init.sh"
+ config.vm.provision "shell", path: "src/init.sh"
 
 end

@@ -78,3 +78,8 @@ Once its up, do `vagrant ssh`, and use logout to leave VM
 - Start scripts with `#!/bin/bash`
 
 
+### PreRequisites to run the app task
+
+Install ruby test dependencies in local/host machine `gem install bundler`
+Then `bundler` and `rake spec`
+
