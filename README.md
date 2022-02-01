@@ -50,4 +50,4 @@ This will install virtualbox, set up a local ip you can reach with your browser 
 and then run the script which updates the vm and installs nginx  
   
 Once its up, do "vagrant ssh", and use logout to leave VM  
-"vagrant halt" stops the vm.  
+"vagrant halt" stops the vm  
