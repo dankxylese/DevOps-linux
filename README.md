@@ -65,7 +65,16 @@ Once its up, do `vagrant ssh`, and use logout to leave VM
 - Recursively remove a directory `rm -rf <directory>`
 - Copying a file `cp <origin-file&location> <final-file or location>`
 - Moving or renaming `mv <origin-file&location> <final file (and or name)>`
+- List active processes `top`
 
+#### Permissions
 
+- View file permissions in a folder `ll`
+- Changing permission `chmod <permissions> <file>`
+
+#### Bash Scripting
+
+- Run bash scripts `./<script>` or `sh <script>`
+- Start scripts with `#!/bin/bash`
 
 
