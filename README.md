@@ -71,6 +71,8 @@ Once its up, do `vagrant ssh`, and use logout to leave VM
 - Copying a file `cp <origin-file&location> <final-file or location>`
 - Moving or renaming `mv <origin-file&location> <final file (and or name)>`
 - List active processes `top`
+- Running services `ps aux`
+- Killing a process by id (from ps aux) `kill <id>`
 
 #### Permissions
 
@@ -110,3 +112,33 @@ npm install forever -g
 npm install
 forever start app.js
 ```
+
+### Linux Variables
+- Creating a variable in Linux `FIRST_NAME=BOB` (should be in caps to stand out, like $PATH)
+- Checking the variable `echo $FIRST_NAME`
+
+### Environment Variables
+- Checking Env variables `env`,  
+- Checking specific variables `printenv <specific variable>` like `printenv HOME` 
+
+#### Example of the example app checking an env variable
+
+```
+if(process.env.DB_HOST) {
+  mongoose.connect(process.env.DB_HOST);
+
+  app.get("/posts" , function(req,res){
+      Post.find({} , function(err, posts){
+        if(err) return res.send(err);
+        res.render("posts/index" , {posts:posts});
+      })
+  });
+}
+```
+
+- Saving an environment variable `export VAR_NAME=TEST`
+- Permanantly saving a variable `nano ~/.bashrc` and add the variable at the end `export VAR_NAME=TEST`
+- Removing a variable `unset VAR_NAME`
+
+## Reverse Proxy
+ln -s /etc/nginx/sites-available/demo_app_redirect.conf /etc/nginx/sites-enabled/demo_app_redirect.conf
