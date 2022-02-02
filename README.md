@@ -3,11 +3,14 @@
 
 ### Benefits of DevOps
 
-**Four pillars of DevOps best practice**
-- Ease of Use (Human interaction)
-- Flexibility (When client wants more features at the end of a sprint,, we are flexible to add these)
-- Robustness - Faster delivery of product
-- Cost - Cost Effective (minimising cost by automating, CI/CD etc..)
+**Four pillars of DevOps best practice**  
+- Ease of Use (Human interaction)  
+- Flexibility (When client wants more features at the end of a sprint,, we are flexible to add these)  
+- Robustness - Faster delivery of product  
+- Cost - Cost Effective (minimising cost by automating, CI/CD etc..)  
+
+<br><br>
+![Vagrant](diagram.png)
 
 ### Monolith, 2 tier and Microservices Architectures
 Monolith  
@@ -38,8 +41,10 @@ SCRIPT
 Vagrant.configure("2") do |config|
  config.vm.box = "ubuntu/xenial64"
 # creating a virtual machine ubuntu 
- config.vm.network "private_network", ip: "192.168.10.100"
+ config.vm.network "private_network", ip: "192.168.56.4"
+ config.vm.synced_folder "src/", "/home/vagrant/code"
  config.vm.provision "shell", inline: $script
+ config.vm.provision "shell", path: "src/init.sh"
 end
 ```
 
@@ -83,3 +88,25 @@ Once its up, do `vagrant ssh`, and use logout to leave VM
 Install ruby test dependencies in local/host machine `gem install bundler`
 Then `bundler` and `rake spec`
 
+### Automation
+
+Script to automate installation of app requirement 
+
+```
+#!/bin/bash
+sudo apt-get update -y
+sudo apt-get upgrade -y
+sudo apt-get install nginx -y
+sudo apt-get install npm -y
+sudo apt-get install rake -y
+sudo apt-get install python-software-properties
+
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+sudo apt-get install nodejs -y
+sudo npm install pm2 -g
+
+cd /home/vagrant/code/app
+npm install forever -g
+npm install
+forever start app.js
+```
