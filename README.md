@@ -198,7 +198,7 @@ server {
 
 ### Two and more VM
 
-Vagrantfile:
+- Saved in separate do statements in the Vagrantfile:
 
 ```
 Vagrant.configure("2") do |config|
