@@ -156,7 +156,8 @@ if(process.env.DB_HOST) {
 
 #### Adding full automation with a crontab
 
-- Installing a crontab `(crontab -l 2>/dev/null; echo "@reboot sleep 10 && sh /home/vagrant/code/app/startForever.sh") | crontab -`  
+- Installing a crontab  
+`(crontab -l 2>/dev/null; echo "@reboot sleep 10 && sh /home/vagrant/code/app/startForever.sh") | crontab -`  
   
 - The script used above: 
 
