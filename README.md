@@ -149,11 +149,31 @@ if(process.env.DB_HOST) {
 - Permanantly saving a variable `nano ~/.bashrc` and add the variable at the end `export VAR_NAME=TEST`
 - Removing a variable `unset VAR_NAME`
 
+### Running the app
+- Starting `npm start`  
+- Or with Forever - install first with `sudo npm install forever -g` and run with `forever start app.js`  
+  
+
+#### Adding full automation with a crontab
+
+- Installing a crontab `(crontab -l 2>/dev/null; echo "@reboot sleep 10 && sh /home/vagrant/code/app/startForever.sh") | crontab -`  
+  
+- The script used above: 
+
+```
+#!/bin/bash
+cd /home/vagrant/code/app/
+forever start app.js
+echo "STARTED FOREVER"
+```
+
+
+
 ### Reverse Proxy
 
 - Forwarding a port to a different port, like 80 to 3000
 
-### Forwarding a Port
+#### Forwarding a Port
 
 ```
 server {
