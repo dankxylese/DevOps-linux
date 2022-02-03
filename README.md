@@ -173,3 +173,29 @@ server {
     }
 }
 ```
+
+
+### Two and more VM
+
+Vagrantfile:
+
+```
+Vagrant.configure("2") do |config|
+ config.vm.define "app" do |app|
+  app.vm.box = "ubuntu/xenial64"
+#  creating a virtual machine ubuntu 
+#  config.vm.network "forwarded_port", guest: 80, host: 8080, id: "nginx"
+  app.vm.network "private_network", ip: "192.168.56.4"
+  app.vm.synced_folder "src/", "/home/vagrant/code"
+#  config.vm.provision "shell", inline: $script
+  app.vm.provision "shell", path: "src/init.sh"
+ end
+
+ config.vm.define "db" do |db|
+  db.vm.box = "ubuntu/xenial64"
+  db.vm.network "private_network", ip: "192.168.56.5"
+ end
+
+end
+
+```
