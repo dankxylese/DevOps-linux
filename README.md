@@ -176,6 +176,8 @@ echo "STARTED FOREVER"
 
 #### Forwarding a Port
 
+- Make changes to /etc/nginx/sites-available/default
+
 ```
 server {
 	listen 80 default_server;
@@ -194,6 +196,8 @@ server {
     }
 }
 ```
+
+- After which you need to restart nginx: `sudo systemctl restart nginx`
 
 
 ### Two and more VM
