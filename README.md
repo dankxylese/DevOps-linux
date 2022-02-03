@@ -99,18 +99,27 @@ Script to automate installation of app requirement
 sudo apt-get update -y
 sudo apt-get upgrade -y
 sudo apt-get install nginx -y
-sudo apt-get install npm -y
-sudo apt-get install rake -y
 sudo apt-get install python-software-properties
 
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 sudo apt-get install nodejs -y
 sudo npm install pm2 -g
 
+#install forever and app
 cd /home/vagrant/code/app
-npm install forever -g
+sudo npm install forever -g
 npm install
+
+#set up port forwarding
+sudo cp /home/vagrant/code/default /etc/nginx/sites-available/
+sudo systemctl restart nginx
+
+#start the app for the first time
 forever start app.js
+
+#make it start automatically when you boot after first setup
+(crontab -l 2>/dev/null; echo "@reboot sleep 10 && sh /home/vagrant/code/app/startForever.sh") | crontab -
+
 ```
 
 ### Linux Variables
@@ -140,5 +149,27 @@ if(process.env.DB_HOST) {
 - Permanantly saving a variable `nano ~/.bashrc` and add the variable at the end `export VAR_NAME=TEST`
 - Removing a variable `unset VAR_NAME`
 
-## Reverse Proxy
-ln -s /etc/nginx/sites-available/demo_app_redirect.conf /etc/nginx/sites-enabled/demo_app_redirect.conf
+### Reverse Proxy
+
+- Forwarding a port to a different port, like 80 to 3000
+
+### Forwarding a Port
+
+```
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	root /var/www/html;
+
+	server_name _;
+
+    location / {
+            proxy_pass http://localhost:3000/;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+    }
+}
+```
