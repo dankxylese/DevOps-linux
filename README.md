@@ -228,6 +228,9 @@ end
 
 ### MongoDB in the DB VM
 
+<br><br>
+![MongoDB](diagram2.png)
+
 #### Installing specific version for this app  
 
 Add a key first:  
@@ -323,4 +326,9 @@ Private Key goes to `~/.shh`
 
 #### On browser
 
-- Go to ip (http://3.251.89.188/) cause we opened ports by now, and installed nginx.
+- Once connected to the SSH, install subversion `sudo apt-get install subversion`
+- With subversion go to your github folder that you want to clone (instead of the whole project) and replace `tree/main` with `trunk`. Now you can copy that and run `svn checkout https://github.com/dankxylese/DevOps-linux/trunk/Vagrant/src`. This will clone just this folder.
+- Then find your init.sh script that you used for Vagrant, adjust it a little (especially with directories), and run, which will install everything automatically.
+- Restart nginx. In `~/code/app` do `npm start`.  
+- Go to ip (http://54.247.20.44/) or (http://54.247.20.44:3000/) cause we opened ports by now, installed nginx and ran the app.
+

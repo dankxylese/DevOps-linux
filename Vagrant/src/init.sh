@@ -5,7 +5,7 @@ sudo apt-get install nginx -y
 sudo apt-get install python-software-properties
 
 #Add database env var early on
-echo "export DB_HOST='mongodb://192.168.56.5:27017/posts" >> ~/.bashrc
+echo "export DB_HOST='mongodb://192.168.56.5:27017/posts'" >> ~/.bashrc
 #Tell system to refresh bashrc cache
 source ~/.bashrc
 
