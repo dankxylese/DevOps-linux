@@ -285,7 +285,6 @@ node seeds/seed.js
 ### EC2
 Elastic Compute Service  
 
-<br><br>
 ![EC2](diagram3.png)
 
 #### Steps to Launching our demo app
