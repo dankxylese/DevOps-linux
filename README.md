@@ -284,6 +284,10 @@ node seeds/seed.js
 
 ### EC2
 Elastic Compute Service  
+
+<br><br>
+![EC2](diagram3.png)
+
 #### Steps to Launching our demo app
 - We might need Linux Ubuntu 16.04-18.04
 - Migrate app data
@@ -324,11 +328,13 @@ Private Key goes to `~/.shh`
 - `chmod 400 eng103a.pem` to make key only readable only to owner
 - `ssh -i "eng103a.pem" ubuntu@ec2-3-251-89-188.eu-west-1.compute.amazonaws.com` to connect to the machine, found in the instance list > start
 
-#### On browser
-
 - Once connected to the SSH, install subversion `sudo apt-get install subversion`
 - With subversion go to your github folder that you want to clone (instead of the whole project) and replace `tree/main` with `trunk`. Now you can copy that and run `svn checkout https://github.com/dankxylese/DevOps-linux/trunk/Vagrant/src`. This will clone just this folder.
 - Then find your init.sh script that you used for Vagrant, adjust it a little (especially with directories), and run, which will install everything automatically.
 - Restart nginx. In `~/code/app` do `npm start`.  
 - Go to ip (http://54.247.20.44/) or (http://54.247.20.44:3000/) cause we opened ports by now, installed nginx and ran the app.
 
+
+#### Alternative local machine 
+
+- Get local files and copy them to AWS `scp -i eng103a.pem -r <origin> ubuntu@ec2-3-250-15-190.eu-west-1.compute.amazonaws.com:~`

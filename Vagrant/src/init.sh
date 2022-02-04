@@ -19,7 +19,7 @@ sudo npm install forever -g
 npm install
 
 #set up port forwarding
-sudo cp /home/vagrant/code/default /etc/nginx/sites-available/
+sudo cp ~/code/default /etc/nginx/sites-available/
 sudo systemctl restart nginx
 
 #start the app for the first time
