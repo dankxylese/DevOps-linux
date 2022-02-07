@@ -304,6 +304,7 @@ Step2:
 - Leave defaults `t2.micro`  
 Step3:  
 - Subnet `devops 1a`
+- (opt) add User Data `cd ~/app && npm start`
 Step4: no changes  
 Step5:
 - Add new key  
@@ -337,3 +338,22 @@ Private Key goes to `~/.shh`
 #### Alternative local machine 
 
 - Get local files and copy them to AWS `scp -i eng103a.pem -r <origin> ubuntu@ec2-3-250-15-190.eu-west-1.compute.amazonaws.com:~`
+
+### AMI (Amazon Machine Image)
+- Like a snapshot in VirtualBox.
+- Can share machine states with others.
+- Helps automate deployment.
+
+#### Creating an image
+
+![AMI](diagram4.png)
+
+- In the top right make an image
+- Then in AMIs on the left hand side find your image, where you can launch an instance of it
+
+## CloudWatch
+### Monitoring with CloudWatch
+- Monitors System status and resources
+
+#### Simple Notification Service
+- Sends an email or text message to notify of status 
