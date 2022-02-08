@@ -453,7 +453,7 @@ Amazon Simple Storage Service (Amazon S3) is an object storage service that offe
 - [More Tiers](https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html)
   
   
-![Data Recovery from S3](diagram6.png)
+<center>![Data Recovery from S3](diagram6.png)</center>
   
 ### Connecting EC2 to S3
 - S3 identifies the EC2 via AWS Access Key and Secret Key (*.pam*) through AWS-CLI configuration.
