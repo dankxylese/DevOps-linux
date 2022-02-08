@@ -49,10 +49,17 @@
 [Notifications](#notifications)  
   
 ## 5. S3 Storage
-[What is S3](#s3-storage)  
-[Crud](#crud)  
+[What is S3](#what-is-s3)  
+[Advantages of S3](#advantages-of-s3)  
+[Use Cases for S3](#use-cases-for-s3)  
+[S3 Storage Classes](#s3-storage-classes)  
+### 5.1 Using S3
 [Connecting EC2 to S3](#connecting-ec2-to-s3)  
 
+### 5.2 Crud
+[What is Crud](#what-is-crud)  
+
+</br></br></br>
 
 # What is DevOps
 ## Why DevOps
@@ -422,16 +429,32 @@ Private Key goes to `~/.shh`
 - Who is going to take management and what will happen to the instance after the (email) notification has been sent.
 
 ## S3 Storage
-![Data Recovery from S3](diagram6.png)
+#### What is S3
+Amazon Simple Storage Service (Amazon S3) is an object storage service that offers industry-leading scalability, data availability, security, and performance. Customers of all sizes and industries can use Amazon S3 to store and protect any amount of data.
 
-- Simple Storage Service
-- Globally Available, can store anything.
-- Used for disaster recovery
+#### Advantages of S3
+- Globally available.
+- Reliable Security.
+- Low cost.
+- Ease of Migration.
+- Simplicity of Management.
+
+#### Use Cases for S3
+- Used for Disaster Recovery.
+- We can perform the CRUD operations (Create, Read, Update, Delete).
+- Analytics.
+- Data Archiving.
+- Static Website Hosting.
+- Security and Compliance.
+
+#### S3 Storage Classes
+- Standard: Access data any time (When data is needed frequently).
+- Glacier: infrequent data access (Cheap, but much slower and has limits on how many times you access it a week/month)
+- [More Tiers](https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html)
   
-#### Crud
-- We can create (Bucket/Object), read, update, delete
-
-
+  
+![Data Recovery from S3](diagram6.png)
+  
 ### Connecting EC2 to S3
 - S3 identifies the EC2 via AWS Access Key and Secret Key (*.pam*) through AWS-CLI configuration.
 - For AWS-CLI you need `Python3`, `pip3` (within your AWS instance / VM)
@@ -439,7 +462,13 @@ Private Key goes to `~/.shh`
   - and add alias `alias python=python3`
   - `sudo pip3 install awscli`
   - `aws configure` with `eu-west-1` as region (for Ireland) and `json` for the preferred language
-
+  - test your connection by listing available buckets with `aws s3 ls`
+  
+  
+  
+### What is Crud
+- Crud is originally used as a software solution to access data within the relational database. But data in S3 is not relational, and thus Crud there has *richer* abstractions
+- We can create (Bucket/Object), read, update, delete
 
 
 
