@@ -43,7 +43,7 @@
 [Creating an image](#creating-an-image)  
   
 ## 4. Cloudwatch
-[Monitoring with CloudWatch](#monitoring-with-cloudwatch) 
+[Monitoring with CloudWatch](#monitoring-with-cloudwatch)  
 [Simple Notification Service](#simple-notification-service)  
 [Autoscaling](#autoscaling)  
 [Notifications](#notifications)  
@@ -407,6 +407,7 @@ Private Key goes to `~/.shh`
 - Then in AMIs on the left hand side find your image, where you can launch an instance of it
 
 ## CloudWatch
+![CloudWatch](diagram5.png)
 ### Monitoring with CloudWatch
 - Monitors System status and resources
 
@@ -421,6 +422,8 @@ Private Key goes to `~/.shh`
 - Who is going to take management and what will happen to the instance after the (email) notification has been sent.
 
 ## S3 Storage
+![Data Recovery from S3](diagram6.png)
+
 - Simple Storage Service
 - Globally Available, can store anything.
 - Used for disaster recovery
