@@ -429,7 +429,7 @@ Private Key goes to `~/.shh`
 - Who is going to take management and what will happen to the instance after the (email) notification has been sent.
 
 ## S3 Storage
-#### What is S3
+### What is S3
 Amazon Simple Storage Service (Amazon S3) is an object storage service that offers industry-leading scalability, data availability, security, and performance. Customers of all sizes and industries can use Amazon S3 to store and protect any amount of data.
 
 #### Advantages of S3
@@ -447,7 +447,7 @@ Amazon Simple Storage Service (Amazon S3) is an object storage service that offe
 - Static Website Hosting.
 - Security and Compliance.
 
-#### S3 Storage Classes
+#### S3 Storage Tiers
 - Standard: Access data any time (When data is needed frequently).
 - Glacier: infrequent data access (Cheap, but much slower and has limits on how many times you access it a week/month)
 - [More Tiers](https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html)
