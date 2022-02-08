@@ -1,8 +1,57 @@
-#Index
+# Index
+
+## 1. Intro
 [Benefits of DevOps](#benefits-of-devops)  
 [Monolith and 2 tier](#monolith-and-2-tier)  
 [Installing Vagrant](#installing-vagrant)  
+### 1.1 Linux
 [Linux basics](#linux-basics)  
+[Permissions](#permissions)  
+[Bash Scripting](#bash-scripting)  
+  
+## 2. Vagrant
+[PreRequisites to run the app task](#prerequisites-to-run-the-app)  
+[Automation](#automation)  
+### 2.1 More on Linux
+[Linux Variables](#linux-variables)  
+[Environment Variables](#environment-variables) 
+### 2.2 Running Node App
+[Example of the App checking an env variable](#example-of-the-app-checking-an-env-variable)  
+[Running the App](#running-the-app)  
+[Adding full automation with a crontab](#adding-full-automation-with-a-crontab) 
+### 2.3 Proxy 
+[Reverse Proxy](#reverse-proxy)  
+[Forwarding a Port](#forwarding-a-port)  
+### 2.4 Vagrant VMs
+[Two and more VMs](#two-and-more-vms) 
+### 2.5 MongoDB 
+[MongoDB in the DB VM](#mongodb-in-the-db-vm)  
+[Installing specific version for this app](#installing-specific-version-for-this-app)  
+[MongoDB Install](#mongodb-install)  
+[Enable access for app VM](#enable-access-for-app-vm)  
+  
+## 3. AWS
+[AWS and Cloud Computing](#aws-and-cloud-computing)  
+[Regions](#regions)  
+[Pre Deployment](#pre-deployment)  
+### 3.1 EC2
+[Steps to Launching our demo app](#steps-to-launching-our-demo-app)  
+[Launching it in real life](#launching-it-irl)  
+[Steps on local machine](#steps-on-local-machine)  
+[Alternative file transfer from Local Machine](#alternative-file-transfer-from-local-machine)  
+[AMI (Amazon Machine Image)](#amazon-machine-image)  
+[Creating an image](#creating-an-image)  
+  
+## 4. Cloudwatch
+[Monitoring with CloudWatch](#monitoring-with-cloudwatch) 
+[Simple Notification Service](#simple-notification-service)  
+[Autoscaling](#autoscaling)  
+[Notifications](#notifications)  
+  
+## 5. S3 Storage
+[What is S3](#s3-storage)  
+[Crud](#crud)  
+[Connecting EC2 to S3](#connecting-ec2-to-s3)  
 
 
 # What is DevOps
@@ -137,7 +186,7 @@ forever start app.js
 - Checking Env variables `env`,  
 - Checking specific variables `printenv <specific variable>` like `printenv HOME` 
 
-#### Example of the example app checking an env variable
+#### Example of the App checking an env variable
 
 ```
 if(process.env.DB_HOST) {
@@ -156,7 +205,7 @@ if(process.env.DB_HOST) {
 - Permanantly saving a variable `nano ~/.bashrc` and add the variable at the end `export VAR_NAME=TEST`
 - Removing a variable `unset VAR_NAME`
 
-### Running the app
+### Running the App
 - Starting `npm start`  
 - Or with Forever - install first with `sudo npm install forever -g` and run with `forever start app.js`  
   
@@ -245,7 +294,7 @@ Add a key first:
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv D68FA50FEA312927
 ```
 
-#### Install:  
+#### MongoDB Install:  
 ```
 echo "deb https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 
@@ -330,7 +379,7 @@ Private Key goes to `~/.shh`
 
 - On the instance, click  on the security group >  edit inbound rules > HTTP & any ipv4
 
-#### On local machine
+#### Steps on local machine
 Private Key goes to `~/.shh`
 - `chmod 400 eng103a.pem` to make key only readable only to owner
 - `ssh -i "eng103a.pem" ubuntu@ec2-3-251-89-188.eu-west-1.compute.amazonaws.com` to connect to the machine, found in the instance list > start
@@ -341,12 +390,11 @@ Private Key goes to `~/.shh`
 - Restart nginx. In `~/code/app` do `npm start`.  
 - Go to ip (http://54.247.20.44/) or (http://54.247.20.44:3000/) cause we opened ports by now, installed nginx and ran the app.
 
-
-#### Alternative local machine 
+#### Alternative file transfer from Local Machine
 
 - Get local files and copy them to AWS `scp -i eng103a.pem -r <origin> ubuntu@ec2-3-250-15-190.eu-west-1.compute.amazonaws.com:~`
 
-### AMI (Amazon Machine Image)
+### Amazon Machine Image
 - Like a snapshot in VirtualBox.
 - Can share machine states with others.
 - Helps automate deployment.
