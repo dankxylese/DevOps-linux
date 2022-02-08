@@ -1,3 +1,10 @@
+#Index
+[Benefits of DevOps](#benefits-of-devops)  
+[Monolith and 2 tier](#monolith-and-2-tier)  
+[Installing Vagrant](#installing-vagrant)  
+[Linux basics](#linux-basics)  
+
+
 # What is DevOps
 ## Why DevOps
 
@@ -12,7 +19,7 @@
 <br><br>
 ![Vagrant](diagram.png)
 
-### Monolith, 2 tier and Microservices Architectures
+### Monolith and 2 tier
 Monolith  
 (One box that has the front end, back end, database)  
 (Everytime you add a feature, you have to restart the entire program)  
@@ -357,3 +364,33 @@ Private Key goes to `~/.shh`
 
 #### Simple Notification Service
 - Sends an email or text message to notify of status 
+
+#### Autoscaling
+- Scaling out is adding more computers / CPUs to deal with the load (autoscaler, spinning up more VMs to handle the load).
+- Scaling up is increasing the minimum requirement by improving hardware in the beginning. (Going from T2.micro to T2.medium)
+
+### Alert Management
+- Who is going to take management and what will happen to the instance after the (email) notification has been sent.
+
+## S3 Storage
+- Simple Storage Service
+- Globally Available, can store anything.
+- Used for disaster recovery
+  
+#### Crud
+- We can create (Bucket/Object), read, update, delete
+
+
+### Connecting EC2 to S3
+- S3 identifies the EC2 via AWS Access Key and Secret Key (*.pam*) through AWS-CLI configuration.
+- For AWS-CLI you need `Python3`, `pip3` (within your AWS instance / VM)
+  - `sudo apt install python3 -y && sudo apt install python3-pip -y`
+  - and add alias `alias python=python3`
+  - `sudo pip3 install awscli`
+  - `aws configure` with `eu-west-1` as region (for Ireland) and `json` for the preferred language
+
+
+
+
+
+ 
