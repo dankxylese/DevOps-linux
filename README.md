@@ -53,11 +53,15 @@
 [Advantages of S3](#advantages-of-s3)  
 [Use Cases for S3](#use-cases-for-s3)  
 [S3 Storage Classes](#s3-storage-classes)  
-### 5.1 Using S3
+### 5.1 Crud
+[What is Crud](#what-is-crud) 
+### 5.2 Using S3
 [Connecting EC2 to S3](#connecting-ec2-to-s3)  
+[Creating a Bucket, and other commands](#creating-a-bucket)  
+[S3 Permissions](#s3-permissions)  
+[Using the Bucket](#using-the-bucket)  
+[Removing the Bucket and files](#removing-the-bucket-and-files)  
 
-### 5.2 Crud
-[What is Crud](#what-is-crud)  
 
 </br></br></br>
 
@@ -389,7 +393,7 @@ Private Key goes to `~/.shh`
 #### Steps on local machine
 Private Key goes to `~/.shh`
 - `chmod 400 eng103a.pem` to make key only readable only to owner
-- `ssh -i "eng103a.pem" ubuntu@ec2-3-251-89-188.eu-west-1.compute.amazonaws.com` to connect to the machine, found in the instance list > start
+- `ssh -i "<path to your access key>.pem" ubuntu@ec2-3-251-89-188.eu-west-1.compute.amazonaws.com` to connect to the machine, found in the instance list > start
 
 - Once connected to the SSH, install subversion `sudo apt-get install subversion`
 - With subversion go to your github folder that you want to clone (instead of the whole project) and replace `tree/main` with `trunk`. Now you can copy that and run `svn checkout https://github.com/dankxylese/DevOps-linux/trunk/Vagrant/src`. This will clone just this folder.
@@ -399,7 +403,7 @@ Private Key goes to `~/.shh`
 
 #### Alternative file transfer from Local Machine
 
-- Get local files and copy them to AWS `scp -i eng103a.pem -r <origin> ubuntu@ec2-3-250-15-190.eu-west-1.compute.amazonaws.com:~`
+- Get local files and copy them to AWS `scp -i <path to your access key>.pem -r <origin> ubuntu@ec2-3-250-15-190.eu-west-1.compute.amazonaws.com:~`
 
 ### Amazon Machine Image
 - Like a snapshot in VirtualBox.
@@ -459,17 +463,46 @@ Amazon Simple Storage Service (Amazon S3) is an object storage service that offe
 - S3 identifies the EC2 via AWS Access Key and Secret Key (*.pam*) through AWS-CLI configuration.
 - For AWS-CLI you need `Python3`, `pip3` (within your AWS instance / VM)
   - `sudo apt install python3 -y && sudo apt install python3-pip -y`
-  - and add alias `alias python=python3`
+  - and add alias `alias python=python3` for easier use or alternatively don't forget to use `python3` in front of each command to avoid the system calling python2 if that is installed
   - `sudo pip3 install awscli`
   - `aws configure` with `eu-west-1` as region (for Ireland) and `json` for the preferred language
   - test your connection by listing available buckets with `aws s3 ls`
   
-  
-  
 ### What is Crud
 - Crud is originally used as a software solution to access data within the relational database. But data in S3 is not relational, and thus Crud there has *richer* abstractions
-- We can create (Bucket/Object), read, update, delete
+- We can create (Bucket/Object), read, update, delete. We can see the uses below
 
+### Using the Bucket
+#### Creating a Bucket
+- `aws s3 mb s3://<your bucket>` (The name has restrictions. You can't have `_` for example)
+
+#### Moving files to our Bucket
+- `aws s3 cp <filename> s3://<your bucket>`
+
+#### Viewing data in your bucket
+- `aws s3 ls s3://<your bucket>`
+
+#### Removing the Bucket and files
+- `aws s3 rm s3://<your bucket> --recursive` - Remove all files from Bucket
+- `aws s3 rb s3://<your bucket>` - Remove Bucket (remove all of the files first)
+
+### Using the Bucket with Boto3
+- First of all, install it on the AWS Instance `pip3 install boto3`
+
+
+### S3 Permissions
+- Permissions are important, they can be edited here
+![S3 Permissions](diagram7.png)
+
+
+### Working on the Bucket with Boto3
+- Checkout this file. It all works.
+![Boto3 File](S3-Boto/BManage.py)
+
+
+
+
+  
 
 
 
