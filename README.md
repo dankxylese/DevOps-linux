@@ -34,7 +34,8 @@
 [AWS and Cloud Computing](#aws-and-cloud-computing)  
 [Regions](#regions)  
 [Pre Deployment](#pre-deployment)  
-### 3.1 EC2
+
+## 4. AWS - EC2
 [Steps to Launching our demo app](#steps-to-launching-our-demo-app)  
 [Launching it in real life](#launching-it-irl)  
 [Steps on local machine](#steps-on-local-machine)  
@@ -42,42 +43,42 @@
 [AMI (Amazon Machine Image)](#amazon-machine-image)  
 [Creating an image](#creating-an-image)  
   
-## 4. Cloudwatch
+## 5. AWS - Cloudwatch
 [Monitoring with CloudWatch](#monitoring-with-cloudwatch)  
 [Simple Notification Service](#simple-notification-service)  
 [Autoscaling](#autoscaling)  
 [Notifications](#notifications)  
   
-## 5. S3 Storage
+## 6. AWS - S3 Storage
 [What is S3](#what-is-s3)  
 [Advantages of S3](#advantages-of-s3)  
 [Use Cases for S3](#use-cases-for-s3)  
 [S3 Storage Classes](#s3-storage-classes)  
-### 5.1 Crud
+### 6.1 Crud
 [What is Crud](#what-is-crud) 
-### 5.2 Using S3
+### 6.2 Using S3
 [Connecting EC2 to S3](#connecting-ec2-to-s3)  
 [Creating a Bucket, and other commands](#creating-a-bucket)  
 [S3 Permissions](#s3-permissions)  
 [Using the Bucket](#using-the-bucket)  
 [Removing the Bucket and files](#removing-the-bucket-and-files)  
   
-## 6. Auto Scaling  
+## 7. AWS - Auto Scaling  
 [What is auto scaling](#auto-scaling)  
 [Templates](#templates)  
 [Auto scaling group](#auto-scaling-group)  
   
-## 7. AWS Virtual Private Cloud Structure  
+## 8. AWS - Virtual Private Cloud  
 [What is a Private Cloud](#aws-virtual-private-cloud)  
-### 7.1 The Structure  
+### 8.1 The Structure  
 [CIDR block](#what-is-cidr-block)  
 [Internet Gateway](#what-is-internet-gateway)  
 [Route Table](#what-is-a-route-table)  
 [Subnet](#what-is-subnet)  
 [Security Groups](#what-are-security-groups)  
 [NACL](#what-is-nacl)  
-### 7.2 Creating a AWS Virtual Private Network  
-[Steps](#creating-a-aws-virtual-private-network)  
+### 8.2 Creating an AWS Virtual Private Network  
+[Steps](#creating-an-aws-virtual-private-network)  
   
 </br></br></br>
 
@@ -365,7 +366,7 @@ node seeds/seed.js
 #### Pre Deployment 
 - Who are we deplying for? Choose location based on that.
 
-### EC2
+## EC2
 Elastic Compute Service  
 
 ![EC2](images/diagram3.png)
@@ -572,7 +573,7 @@ Virtual Private Cloud lets you work in a private section of the Cloud, where clo
 - NACL is similar to Security Groups as it acts like a firewall for subnets instead of separate instances.
 
 
-### Creating a AWS Virtual Private Network
+### Creating an AWS Virtual Private Network
 My CIDR block `10.0.10.0/24`
 
 Step 1  
