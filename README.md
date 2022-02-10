@@ -77,7 +77,7 @@
 - Cost - Cost Effective (minimising cost by automating, CI/CD etc..)  
 
 <br><br>
-![Vagrant](diagram.png)
+![Vagrant](images/diagram.png)
 
 ### Monolith and 2 tier
 Monolith  
@@ -296,7 +296,7 @@ end
 ### MongoDB in the DB VM
 
 <br><br>
-![MongoDB](diagram2.png)
+![MongoDB](images/diagram2.png)
 
 #### Installing specific version for this app  
 
@@ -352,7 +352,7 @@ node seeds/seed.js
 ### EC2
 Elastic Compute Service  
 
-![EC2](diagram3.png)
+![EC2](images/diagram3.png)
 
 #### Steps to Launching our demo app
 - We might need Linux Ubuntu 16.04-18.04
@@ -412,13 +412,13 @@ Private Key goes to `~/.shh`
 
 #### Creating an image
 
-![AMI](diagram4.png)
+![AMI](images/diagram4.png)
 
 - In the top right make an image
 - Then in AMIs on the left hand side find your image, where you can launch an instance of it
 
 ## CloudWatch
-![CloudWatch](diagram5.png)
+![CloudWatch](images/diagram5.png)
 ### Monitoring with CloudWatch
 - Monitors System status and resources
 
@@ -457,7 +457,7 @@ Amazon Simple Storage Service (Amazon S3) is an object storage service that offe
 - [More Tiers](https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html)
   
   
-![Data Recovery from S3](diagram6.png)
+![Data Recovery from S3](images/diagram6.png)
   
 ### Connecting EC2 to S3
 - S3 identifies the EC2 via AWS Access Key and Secret Key (*.pam*) through AWS-CLI configuration.
@@ -492,7 +492,7 @@ Amazon Simple Storage Service (Amazon S3) is an object storage service that offe
 
 ### S3 Permissions
 - Permissions are important, they can be edited here
-![S3 Permissions](diagram7.png)
+![S3 Permissions](images/diagram7.png)
 
 
 ### Working on the Bucket with Boto3
@@ -500,10 +500,19 @@ Amazon Simple Storage Service (Amazon S3) is an object storage service that offe
 ![Boto3 File](S3-Boto/BManage.py)
 
 
+## Autoscaling
 
+![Autoscaling](images/diagram8.png)
 
-  
+#### Template
+- Create a template by selecting `Launch Templates` from the side bar.
+- Tick `Auto Scaling guidance`
+- In Advance, add User data - commands that will run in console on start
 
-
-
+#### Auto scaling group
+- VPC (-6da)
+- In the network section, select your availability zones (-9d2; -164; -0e5)
+- And Enable group metrics
+- Group size (2,2,3)
+- Tick `Target tracking scaling policy`
  
