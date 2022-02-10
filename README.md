@@ -512,11 +512,21 @@ Amazon Simple Storage Service (Amazon S3) is an object storage service that offe
 
 
 ### Working on the Bucket with Boto3
-- Checkout this file. It all works.
+- Check out this file. It all works.
 ![Boto3 File](S3-Boto/BManage.py)
 
 
 ## Auto scaling
+
+- Auto Scaling monitors your applications and automatically adjusts capacity to maintain steady, predictable performance at the lowest possible cost.
+
+Auto Scaling uses multiple components, I've written about in detail above, to achieve its goal:
+  - AMI (Amazon Machine Image)
+  - Load Balancer
+  - Snapshot
+  - EC2 Instance
+  - Autoscaling groups
+
 
 ![Autoscaling](images/diagram8.png)
 
