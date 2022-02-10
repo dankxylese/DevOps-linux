@@ -61,8 +61,24 @@
 [S3 Permissions](#s3-permissions)  
 [Using the Bucket](#using-the-bucket)  
 [Removing the Bucket and files](#removing-the-bucket-and-files)  
-
-
+  
+## 6. Auto Scaling  
+[What is auto scaling](#auto-scaling)  
+[Templates](#templates)  
+[Auto scaling group](#auto-scaling-group)  
+  
+## 7. AWS Virtual Private Cloud Structure  
+[What is a Private Cloud](#aws-virtual-private-cloud)  
+### 7.1 The Structure  
+[CIDR block](#what-is-cidr-block)  
+[Internet Gateway](#what-is-internet-gateway)  
+[Route Table](#what-is-a-route-table)  
+[Subnet](#what-is-subnet)  
+[Security Groups](#what-are-security-groups)  
+[NACL](#what-is-nacl)  
+### 7.2 Creating a AWS Virtual Private Network  
+[Steps](#creating-a-aws-virtual-private-network)  
+  
 </br></br></br>
 
 # What is DevOps
@@ -500,11 +516,11 @@ Amazon Simple Storage Service (Amazon S3) is an object storage service that offe
 ![Boto3 File](S3-Boto/BManage.py)
 
 
-## Autoscaling
+## Auto scaling
 
 ![Autoscaling](images/diagram8.png)
 
-#### Template
+#### Templates
 - Create a template by selecting `Launch Templates` from the side bar.
 - Tick `Auto Scaling guidance`
 - In Advance, add User data - commands that will run in console on start
@@ -515,4 +531,60 @@ Amazon Simple Storage Service (Amazon S3) is an object storage service that offe
 - And Enable group metrics
 - Group size (2,2,3)
 - Tick `Target tracking scaling policy`
- 
+
+
+
+## AWS Virtual Private Cloud
+- Virtual Private Cloud lets you work in a private section of the Cloud, where cloud services that you launch are isolated from other users and resources.
+- You have complete control over your virtual networking environment, including selection of an IP address range, creation of subnets, and configuration of route tables and network gateways.
+
+![VPNS](images/diagram10.png)
+
+### The Structure
+#### What is CIDR block
+- Classless Inter-Domain Routing, is a method for allocating IP addresses and for IP routing
+
+#### What is Internet Gateway
+- A gateway which connects public subnet to public internet. It sits between the internet and your applications, converting information your application receives and sends from one protocol to another.
+
+#### What is a Route Table
+- The routing table contains a list of specific routing destinations. When the router receives a packet of data, it references the routing table to know where to send that data.
+
+#### What is Subnet
+- Subnet is a range of IP addresses in your VPC. You can launch AWS resources, such as EC2 instances, into a specific subnet
+  - Public Subnet : Accessible via Internet. Uses a Internet Gateway to reach Internet.
+  - Private Subnet : Non accessible via internet. Can use a NAT Gateway, which would provide a one way connection from your private subnet to external resources (resource not in your VPC)
+
+#### What are Security Groups
+- Security Groups are a virtual firewall on a per instance basis. This Helps filter network traffic to instances within a VPC (like EC2, Database)
+
+
+#### What is NACL
+- NACL is similar to Security Groups as it acts like a firewall for subnets instead of separate instances.
+
+
+### Creating a AWS Virtual Private Network
+My CIDR block `10.0.10.0/24`
+
+Step 1  
+- Select Region - Ireland  
+- Create VPC  
+- Valid CDIR block for out VPC (10.0.0.0/16)  
+  
+Step 2  
+- Create Internet Gateway (IG)  
+- Attach IG to our VPC  
+  
+Step 3  
+- Create Public Subnet  
+- Associate the Subnet to our VPC  
+  
+Step 4  
+- Create Route Table(s) for our Public Subnet (empty by default)  
+- Edit routes to allow IG (add routes)  
+- Associate to our Public Subnet  
+  
+Step 5  
+- Create Security Group in our Public Subnet, to allow required ports  
+- Allow port 80, 3000 (for our app)  
+  
