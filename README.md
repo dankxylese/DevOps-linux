@@ -573,8 +573,8 @@ Virtual Private Cloud lets you work in a private section of the Cloud, where clo
 - NACL is similar to Security Groups as it acts like a firewall for subnets instead of separate instances.
 
 
-### Creating an AWS Virtual Private Network
-My CIDR block `10.0.10.0/24`
+### Who do we create an AWS Virtual Private Network
+My Subnet/CIDR block `10.0.10.0/24`
 
 Step 1  
 - Select Region - Ireland  
@@ -598,3 +598,37 @@ Step 5
 - Create Security Group in our Public Subnet, to allow required ports  
 - Allow port 80, 3000 (for our app)  
   
+
+### Creating an AWS Virtual Private Network
+#### VPC
+- Search `VPC` > `Your VPCs` > `Create VPC`  
+- Name is `eng103a_vlad_vpc` and IP is `10.0.0.0/16`  
+
+#### Internet Gateway
+- Then from the sidebar `Internet gateways` > `Create Internet gateway`  
+- Name is `eng103a_vlad_ig`  
+- Then on the IG, (top right) click `Actions` > `Attach VPC`
+- State should change to `Attached`
+
+#### Subnet
+- Then from the sidebar `Subnets` > `Create subnet`
+- Select the VPC
+- Name is `eng103a_vlad_public_subnet`
+- IPV4 CIDR block is `10.0.10.0/24`
+
+#### Route Table
+- Then from the sidebar `Route Tables` > `Create route table`
+- Select the VPC
+- Name is `eng103a_vlad_rt_public`
+- Then on the RT, (top right) click `Actions` > `Edit routes`
+- `Add route` > Destination `0.0.0.0/0` (everyone) > Target - click on `Internet Gateway` it should show you options starting with `igw-` that you've made.
+- Then on the RT, (top right) click `Actions` > `Edit subnet associations`
+- Select the correct subnet you want to enable internet connectivity for. We only have 1 right now.
+
+
+Now when you're creating an EC2 instance, you can select your own VPC, and your subnet. The public one should have the app, and you should also make a separate subnet for the DB, and then link them later.
+
+### Connect the DB instance now
+- Make a new subnet
+- Leave routing tables unchanged (the only route should be 10.0.0.0/16 with local target) 
+- Make sure to not assign a public ip for it when creating the instance
