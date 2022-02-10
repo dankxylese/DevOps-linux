@@ -518,7 +518,7 @@ Amazon Simple Storage Service (Amazon S3) is an object storage service that offe
 
 ## Auto scaling
 
-- Auto Scaling monitors your applications and automatically adjusts capacity to maintain steady, predictable performance at the lowest possible cost.
+Auto Scaling monitors your applications and automatically adjusts capacity to maintain steady, predictable performance at the lowest possible cost.
 
 Auto Scaling uses multiple components, I've written about in detail above, to achieve its goal:
   - AMI (Amazon Machine Image)
@@ -545,8 +545,7 @@ Auto Scaling uses multiple components, I've written about in detail above, to ac
 
 
 ## AWS Virtual Private Cloud
-- Virtual Private Cloud lets you work in a private section of the Cloud, where cloud services that you launch are isolated from other users and resources.
-- You have complete control over your virtual networking environment, including selection of an IP address range, creation of subnets, and configuration of route tables and network gateways.
+Virtual Private Cloud lets you work in a private section of the Cloud, where cloud services that you launch are isolated from other users and resources. You have complete control over your virtual networking environment, including selection of an IP address range, creation of subnets, and configuration of route tables and network gateways.
 
 ![VPNS](images/diagram10.png)
 
