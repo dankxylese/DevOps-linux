@@ -632,3 +632,11 @@ Now when you're creating an EC2 instance, you can select your own VPC, and your 
 - Make a new subnet
 - Leave routing tables unchanged (the only route should be 10.0.0.0/16 with local target) 
 - Make sure to not assign a public ip for it when creating the instance
+
+## Securing Connections
+
+#### Secure Github
+- Create ssh on localhost
+  - In your ~/.ssh, run `ssh-keygen -t ed25519 -C "your_email@example.com"`, keep the name default
+- Copy public ssh key to Github
+  - If you have an issue, you can run the debugging command `ssh -vT git@github.com`
