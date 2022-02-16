@@ -91,9 +91,9 @@
 ## 11 Infrastructure as code  
 [Infrastructure as code](#infrastructure-as-code)  
 ### 11.1 Infrastructure as code  
-[Ansible](#ansible)
-[Commands in Ansible](commands-in-ansible)
-[Debugging in Ansible](debugging-in-ansible)
+[Ansible](#ansible)  
+[Commands in Ansible](#commands-in-ansible)  
+[Debugging in Ansible](#debugging-in-ansible)  
 
   
 </br></br></br>
