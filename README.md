@@ -640,3 +640,54 @@ Now when you're creating an EC2 instance, you can select your own VPC, and your 
   - In your ~/.ssh, run `ssh-keygen -t ed25519 -C "your_email@example.com"`, keep the name default
 - Copy public ssh key to Github
   - If you have an issue, you can run the debugging command `ssh -vT git@github.com`
+
+#### Secure Jenkins
+- Create another ssh key for just the repo Jenkins is going to be working with. Put Keys on both Git repo settings, and Jenkins.
+- Also add AWS credentials to Jenkins, after which point you can also limit Jenkins' access to AWS through IP limiting on Security Groups in AWS.
+
+## CICD(/CDe) through Jenkins
+![link to repo](https://github.com/dankxylese/DevOps-CICD)
+- This one is a separate repo since we had webhooks from it to Jenkins, and I wouldn't want Jenkins to keep building when I make changes to documentation.
+
+## Infrastructure as code
+#### Tools Used
+-Ansible & Terraform
+  - Configuration Management
+  - Orchestration
+  - Push Config - Ansible to push to config
+  - Terraform for Orchestration
+  - Ansible YAML/YML (*.yaml/*.yml)
+
+### Ansible
+#### Setting up
+- Look through ![this init script](https://github.com/dankxylese/DevOps-linux/tree/main/inits/init-cont.sh) to see required software.
+
+#### Commands
+- Basic structure `ansible <machine> -m <command>`
+- Ping a machine `ansible web -m ping`
+  - Ping all `ansible all -m ping`
+- Sending commands over ansible `ansible web -a "<linux command goes here>"` without ssh'ing into a machine
+  - Example `ansible web -a "uname -a"`
+  
+- Working with `-m file` command - `ansible <machine> -m file -a 'path=<path> state=touch'`
+  - Making a file `ansible web -m file -a 'path=/var/tmp/ansible_test.txt state=touch'`
+  - Changing permissions `ansible web -b -m file -a 'path=/var/tmp/ansible_test.txt owner=root group=root mode=0644'`
+  - Removing a file `ansible web -m file -a 'path=/var/tmp/ansible_test.txt state=absent'`
+  - Make new Directory `ansible web -m file -a 'path=/var/tmp/archive state=directory'`
+
+- Working with `-m copy` command - `ansible <machine> -m copy -a 'src=/etc/hosts dest=/etc/hosts'`
+  - Copying without privileges `ansible web -m copy -a 'src=/etc/hosts dest=/etc/hosts'`
+  - Copying with root privs `ansible web -b -m copy -a 'src=/etc/hosts dest=/etc/hosts'` (notice the `-b` tag)
+  - Before overwriting, save old copy `ansible web -b -m copy -a 'src=/etc/hosts dest=/etc/hosts backup=yes'`
+
+- Working with `-m fetch` command - `ansible <machine> -m fetch -a 'src=/etc/hosts dest=/etc/hosts'`
+  - Downloading without privileges `ansible web -m fetch -a 'src=/home/vagrant/test2.txt dest=/home/vagrant/ flat=yes'`
+  - Downloading with root privs `ansible web -m fetch -a 'src=/home/vagrant/test2.txt dest=/home/vagrant/ flat=yes'`
+  - If you don't include `flat=yes`, then the saved file will be put into `/home/vagrant/<ip of origin machine>/home/vagrant/test2.txt`.
+  - With `flat=yes` we can save it directly to `/home/vagrant/`
+
+For more details to commands, go ![here](https://www.unixarena.com/2018/07/ansible-file-and-copy-module-ad-hoc-mode.html/)
+
+##### Debugging
+- Shows all registered hosts `ansible --list-hosts all` (registered in file `/etc/ansible/hosts`)
+
