@@ -79,6 +79,22 @@
 [NACL](#what-is-nacl)  
 ### 8.2 Creating an AWS Virtual Private Network  
 [Steps](#creating-an-aws-virtual-private-network)  
+[Connect the DB instance now](#connect-the-db-instance-now)
+
+## 9 Securing Connections  
+[Github](#secure-github)  
+[Jenkins](#secure-jenkins)  
+
+## 10 CICD  
+[CICD through Jenkins](#cicd-through-jenkins)  
+  
+## 11 Infrastructure as code  
+[Infrastructure as code](#infrastructure-as-code)  
+### 11.1 Infrastructure as code  
+[Ansible](#ansible)
+[Commands in Ansible](commands-in-ansible)
+[Debugging in Ansible](debugging-in-ansible)
+
   
 </br></br></br>
 
@@ -645,8 +661,8 @@ Now when you're creating an EC2 instance, you can select your own VPC, and your 
 - Create another ssh key for just the repo Jenkins is going to be working with. Put Keys on both Git repo settings, and Jenkins.
 - Also add AWS credentials to Jenkins, after which point you can also limit Jenkins' access to AWS through IP limiting on Security Groups in AWS.
 
-## CICD(/CDe) through Jenkins
-![link to repo](https://github.com/dankxylese/DevOps-CICD)
+## CICD through Jenkins
+[link to repo](https://github.com/dankxylese/DevOps-CICD)
 - This one is a separate repo since we had webhooks from it to Jenkins, and I wouldn't want Jenkins to keep building when I make changes to documentation.
 
 ## Infrastructure as code
@@ -659,10 +675,10 @@ Now when you're creating an EC2 instance, you can select your own VPC, and your 
   - Ansible YAML/YML (*.yaml/*.yml)
 
 ### Ansible
-#### Setting up
-- Look through ![this init script](https://github.com/dankxylese/DevOps-Ansible/blob/main/inits/init-cont.sh) to see required software.
+#### Setting up Ansible
+- Look through [this init script](https://github.com/dankxylese/DevOps-Ansible/blob/main/inits/init-cont.sh) to see required software.
 
-#### Commands
+#### Commands in Ansible
 - Basic structure `ansible <machine> -m <command>`
 - Ping a machine `ansible web -m ping`
   - Ping all `ansible all -m ping`
@@ -688,6 +704,6 @@ Now when you're creating an EC2 instance, you can select your own VPC, and your 
 
 For more details to commands, go ![here](https://www.unixarena.com/2018/07/ansible-file-and-copy-module-ad-hoc-mode.html/)
 
-##### Debugging
+##### Debugging in Ansible
 - Shows all registered hosts `ansible --list-hosts all` (registered in file `/etc/ansible/hosts`)
 
