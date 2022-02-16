@@ -660,7 +660,7 @@ Now when you're creating an EC2 instance, you can select your own VPC, and your 
 
 ### Ansible
 #### Setting up
-- Look through ![this init script](https://github.com/dankxylese/DevOps-linux/tree/main/inits/init-cont.sh) to see required software.
+- Look through ![this init script](https://github.com/dankxylese/DevOps-Ansible/blob/main/inits/init-cont.sh) to see required software.
 
 #### Commands
 - Basic structure `ansible <machine> -m <command>`
