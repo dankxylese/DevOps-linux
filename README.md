@@ -370,8 +370,7 @@ Then switch VMs to app, and create a permanent env variable `DB_HOST`
 - REFRESH systems cache for bashrc with `source ~/.bashrc`
 - Check it with `printenv DB_HOST`
 
-
-node seeds/seed.js
+- Change config with a oneliner `sudo sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf`
 
 ## AWS and Cloud Computing
 ### Basics
@@ -686,7 +685,7 @@ Now when you're creating an EC2 instance, you can select your own VPC, and your 
   - Example `ansible web -a "uname -a"`
   
 - Working with `-m file` command - `ansible <machine> -m file -a 'path=<path> state=touch'`
-  - Making a file `ansible web -m file -a 'path=/var/tmp/ansible_test.txt state=touch'`
+  - Making a file `ansibl-e web -m file -a 'path=/var/tmp/ansible_test.txt state=touch'`
   - Changing permissions `ansible web -b -m file -a 'path=/var/tmp/ansible_test.txt owner=root group=root mode=0644'`
   - Removing a file `ansible web -m file -a 'path=/var/tmp/ansible_test.txt state=absent'`
   - Make new Directory `ansible web -m file -a 'path=/var/tmp/archive state=directory'`
@@ -706,4 +705,38 @@ For more details to commands, go ![here](https://www.unixarena.com/2018/07/ansib
 
 ##### Debugging in Ansible
 - Shows all registered hosts `ansible --list-hosts all` (registered in file `/etc/ansible/hosts`)
+
+#### Installing with Ansible
+- This file [here is the playbook.yml](https://github.com/dankxylese/DevOps-Ansible/blob/main/inits/install_nginx.yml)
+
+##### Example of a .yml file
+```
+# YAML/YML file to create a playbook to configure nginx
+
+# It starts with 3 dashes
+---
+# Add name of host/instance/vm
+- hosts: web
+# Collect logs
+  gather_facts: yes
+# We need admin access to install anything
+  become: true
+# Add instructions - install nginx - in web server
+  tasks:
+  - name: Installing Nginx web-server in our app machine
+    apt: pkg=nginx state=present
+# apt: pkg=nginx state=absent # to remove a package
+
+
+#Hint: mind the indents, use 2 spaces instead of a tab
+```
+- `ansible-playbook <filename>.yml`
+- `ansible web -a "systemctl status nginx"` checks the status 
+
+- Copying /code/ folder bc folder linking in vagrant isn't working
+- `scp -i /home/manse/Sparta/103-Ansible/.vagrant/machines/controller/virtualbox/private_key -r code vagrant@192.168.56.10:~` 
+
+
+
+
 
