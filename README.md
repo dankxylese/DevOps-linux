@@ -676,7 +676,7 @@ Now when you're creating an EC2 instance, you can select your own VPC, and your 
 ## Ansible
 ![AnsibleAndPlaybook](images/diagram11.png)
 
-#### Setting up Ansible
+### Setting up Ansible
 - Look through [this init script](https://github.com/dankxylese/DevOps-Ansible/blob/main/inits/init-cont.sh) to see required software.
 
 #### Commands in Ansible
@@ -708,7 +708,7 @@ For more details to commands, go ![here](https://www.unixarena.com/2018/07/ansib
 ##### Debugging in Ansible
 - Shows all registered hosts `ansible --list-hosts all` (registered in file `/etc/ansible/hosts`)
 
-#### Installing with Ansible
+### Installing with Ansible + Playbook
 - This file [here is the playbook.yml](https://github.com/dankxylese/DevOps-Ansible/blob/main/inits/install_nginx.yml)
 
 ##### Example of a .yml file
@@ -739,8 +739,7 @@ For more details to commands, go ![here](https://www.unixarena.com/2018/07/ansib
 - Copying /code/ folder bc folder linking in vagrant isn't working
 - `scp -i /home/manse/Sparta/103-Ansible/.vagrant/machines/controller/virtualbox/private_key -r code vagrant@192.168.56.10:~` 
 
-
-- Ansible Start an EC2 Instance 
+#### Ansible Start an EC2 Instance
 
 - Make new VM
 - Set Up Controller in Hybrid infrastructure from on prim to public
@@ -763,7 +762,7 @@ For more details to commands, go ![here](https://www.unixarena.com/2018/07/ansib
   - `ansible db -m ping --ask-vault-pass`
   - Require password for on-prem to public `--ask-vault-pass`
 
-##### Creating a new controller
+#### Starting an EC2 Instance with Ansible
   sudo apt-get install update
   sudo apt-get install upgrade
   sudo apt-get install tree
