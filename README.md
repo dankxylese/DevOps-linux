@@ -89,6 +89,7 @@
 [CICD through Jenkins](#cicd-through-jenkins)  
   
 ## 11 Infrastructure as code  
+saving time, cost, release faster, quick spin up of EC2s, auto scaling, automation
 [Infrastructure as code](#infrastructure-as-code)  
 
 ## 12 Ansible  
@@ -786,6 +787,8 @@ For more details to commands, go ![here](https://www.unixarena.com/2018/07/ansib
 aws_access_key:
 aws_secret_key:
 ```
+
+- Then encrypt the key `sudo ansible-vault encrypt key.yml`
 
 - Start the EC2 instance once everything has been done
 - `sudo ansible-playbook launch.yml --connection=local --tags=ec2-create -e "ansible_python_interpreter=/usr/local/bin/python3" --ask-vault-pass`
