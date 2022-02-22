@@ -674,6 +674,8 @@ Now when you're creating an EC2 instance, you can select your own VPC, and your 
   - Ansible YAML/YML (*.yaml/*.yml)
 
 ## Ansible
+![AnsibleAndPlaybook](images/diagram11.png)
+
 #### Setting up Ansible
 - Look through [this init script](https://github.com/dankxylese/DevOps-Ansible/blob/main/inits/init-cont.sh) to see required software.
 
