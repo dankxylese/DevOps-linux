@@ -680,7 +680,7 @@ Now when you're creating an EC2 instance, you can select your own VPC, and your 
   - Ansible YAML/YML (*.yaml/*.yml)
 
 ## Ansible
-![AnsibleAndPlaybook](images/diagram11.png)
+![Ansible](images/diagram12.png)
 
 ### Setting up Ansible
 - Look through [this init script](https://github.com/dankxylese/DevOps-Ansible/blob/main/inits/init-cont.sh) to see required software.
@@ -715,6 +715,8 @@ For more details to commands, go ![here](https://www.unixarena.com/2018/07/ansib
 - Shows all registered hosts `ansible --list-hosts all` (registered in file `/etc/ansible/hosts`)
 
 ### Installing with Ansible + Playbook
+![AnsibleAndPlaybook](images/diagram11.png)
+
 - This file [here is the playbook.yml](https://github.com/dankxylese/DevOps-Ansible/blob/main/inits/install_nginx.yml)
 
 ##### Example of a .yml file
