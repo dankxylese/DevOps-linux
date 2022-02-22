@@ -90,10 +90,16 @@
   
 ## 11 Infrastructure as code  
 [Infrastructure as code](#infrastructure-as-code)  
-### 11.1 Infrastructure as code  
+
+## 12 Ansible  
 [Ansible](#ansible)  
 [Commands in Ansible](#commands-in-ansible)  
 [Debugging in Ansible](#debugging-in-ansible)  
+## 12.1 Ansible Playbooks
+[Installing with Ansible + Playbook](#installing-with-ansible--playbook)
+[How to Start an EC2 Instance with Ansible](#how-to-start-an-ec2-instance-with-ansible)
+[Starting an EC2 Instance with Ansible](#starting-an-ec2-instance-with-ansible)
+[Playbook Example](#playbook-example)
 
   
 </br></br></br>
@@ -739,7 +745,7 @@ For more details to commands, go ![here](https://www.unixarena.com/2018/07/ansib
 - Copying /code/ folder bc folder linking in vagrant isn't working
 - `scp -i /home/manse/Sparta/103-Ansible/.vagrant/machines/controller/virtualbox/private_key -r code vagrant@192.168.56.10:~` 
 
-#### Ansible Start an EC2 Instance
+#### How to Start an EC2 Instance with Ansible
 
 - Make new VM
 - Set Up Controller in Hybrid infrastructure from on prim to public
@@ -782,6 +788,8 @@ aws_secret_key:
 - Start the EC2 instance once everything has been done
 - `sudo ansible-playbook launch.yml --connection=local --tags=ec2-create -e "ansible_python_interpreter=/usr/local/bin/python3" --ask-vault-pass`
 
+
+##### Playbook Example
 
 ```
 ---
