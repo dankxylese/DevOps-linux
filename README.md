@@ -790,7 +790,8 @@ After that we create a new file in preperation for capturing IP Addresses of the
 
 ###### Template:
 
-[An example of this actual file I worked on, here (on a different repo)](https://github.com/dankxylese/DevOps-Ansible/blob/main/init/launch.yml)
+An example of this actual file I worked on, [here (on a different repo)](https://github.com/dankxylese/DevOps-Ansible/blob/main/init/launch.yml)
+- Check this repo [here](https://github.com/dankxylese/DevOps-Ansible)
 ```
 ---
 - hosts: localhost
@@ -891,12 +892,10 @@ aws_secret_key: Ipsum Lorem
 ```
 
 - Then encrypt the key `sudo ansible-vault encrypt key.yml`
-- creat helper file
-
 - Start the EC2 instance once everything has been done
 `sudo ansible-playbook -e @key.yml launch.yml -e "ansible_python_interpreter=/usr/bin/python3" --ask-vault-pass`
 
-##### ---
+## ---
 - (OLD VIRSION OF STARTlogout [USED RIGHT HERE](https://github.com/dankxylese/DevOps-Ansible/blob/main/init/launch-old-worse.yml)) 
 - Start the EC2 instance once everything has been done
 - `sudo ansible-playbook launch.yml --connection=local --tags=ec2-create -e "ansible_python_interpreter=/usr/bin/python3" --ask-vault-pass`
