@@ -851,3 +851,6 @@ aws_secret_key:
 
 - Once the machine is up, add it to /etc/ansible/hosts
 - And run a ping `sudo ansible aws -m ping --ask-vault-pass`
+  
+- This should be the responce
+![Ansible-Ping](images/ansible-ping.png)
