@@ -778,20 +778,128 @@ For more details to commands, go ![here](https://www.unixarena.com/2018/07/ansib
   sudo apt-add-repository --yes --update ppa:ansible/ansible
   sudo apt-get install ansible
   sudo apt-get install python3-pip
+  sudo apt-get install awscli
   pip3 install boto boto3 awscli
 
-- go to/create `cd /etc/ansible/group_var/all/`
-- create a new file called `key.yml`
-- inside, put this:
+- Configure AWScli - `aws configure`
+
+##### Creating the Playbook 
+The following template first defines the local variables, then creates a new Security Group (ports can be customised to your requirements). Then we spawn two VMs.
+    TODO: Make them have different tags.
+After that we create a new file in preperation for capturing IP Addresses of the created machines. We write it to the created file, then wait for the machines to come up after which we add tags to machine names
+
+###### Template:
+
+[An example of this actual file I worked on, here (on a different repo)](https://github.com/dankxylese/DevOps-Ansible/blob/main/init/launch.yml)
 ```
-aws_access_key:
-aws_secret_key:
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  tags: provisioning
+  vars:
+    instance_type: t2.micro
+    key_name: eng103a
+    region: eu-west-1
+    image: ami-07d8796a2b0f8d29c
+    id: "eng103a_vlad_ansible_instance"
+    sec_group: "eng103a_vlad_basic_firewall"
+    count: 2
+  vars_files:
+    -  /etc/ansible/group_var/all/aws_vlad.yml
+
+
+  tasks:
+    - name: Create a security group
+      local_action: 
+        module: ec2_group
+        name: "{{ sec_group }}"
+        description: Security Group for Test Ansible EC2 deployment
+        region: "{{ region }}"
+        rules:
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 8080
+            to_port: 8080
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 443
+            to_port: 443
+            cidr_ip: 0.0.0.0/0
+        rules_egress:
+          - proto: all
+            cidr_ip: 0.0.0.0/0
+      register: eng103a_vlad_basic_firewall
+
+      #SPAWNING VMs
+    - name: Launching Vlad's the new EC2 Instance
+      local_action: ec2 
+                    group={{ sec_group }} 
+                    instance_type={{instance_type}} 
+                    image={{ image }} 
+                    wait=true
+                    wait_timeout=500 
+                    region={{ region }} 
+                    aws_access_key={{ access_key }}
+                    aws_secret_key={{ secret_key }}
+                    count={{ count }}
+      register: ec2_vlad
+
+
+      #MAKING A NEW FILE
+    - name: Creating an empty file for future local jiggery-pokery
+      file:
+        path: "temp_hostlist.txt"
+        state: touch
+
+    - name: Add the newly created EC2 instance(s) to the local host group
+      local_action: lineinfile
+                    path=temp_hostlist.txt
+                    regexp={{ item.public_ip }} 
+                    line={{ item.public_ip }}
+      with_items: '{{ec2_vlad.instances}}'
+
+    - name: Add new instance to Vlad's host group
+      add_host:
+        hostname: "{{ item.public_ip }}"
+        groupname: launched
+      with_items: "{{ ec2_vlad.instances }}"
+
+    - name: Let's wait for SSH to come up. Usually that takes ~10 seconds
+      local_action: wait_for 
+                    host={{ item.public_ip }} 
+                    port=22 
+                    state=started
+      with_items: '{{ ec2_vlad.instances }}'
+
+    - name: Add tag to Instance(s)
+      local_action: ec2_tag resource={{ item.id }} region={{ region }} state=present
+      with_items: '{{ ec2_vlad.instances }}'
+      args:
+        tags:
+          Name: eng103a_vlad_ansible_
+```
+
+- In your playbook directory create a new file called `key.yml`
+- Inside, put your AWS Credentials:
+```
+aws_access_key: Lorem Ipsum
+aws_secret_key: Ipsum Lorem
 ```
 
 - Then encrypt the key `sudo ansible-vault encrypt key.yml`
+- creat helper file
 
 - Start the EC2 instance once everything has been done
-- `sudo ansible-playbook launch.yml --connection=local --tags=ec2-create -e "ansible_python_interpreter=/usr/local/bin/python3" --ask-vault-pass`
+`sudo ansible-playbook -e @key.yml launch.yml -e "ansible_python_interpreter=/usr/bin/python3" --ask-vault-pass`
+
+##### ---
+- (OLD VIRSION OF STARTlogout [USED RIGHT HERE](https://github.com/dankxylese/DevOps-Ansible/blob/main/init/launch-old-worse.yml)) 
+- Start the EC2 instance once everything has been done
+- `sudo ansible-playbook launch.yml --connection=local --tags=ec2-create -e "ansible_python_interpreter=/usr/bin/python3" --ask-vault-pass`
 
 
 ##### Playbook Example
