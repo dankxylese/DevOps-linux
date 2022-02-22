@@ -730,6 +730,7 @@ For more details to commands, go ![here](https://www.unixarena.com/2018/07/ansib
 
 #Hint: mind the indents, use 2 spaces instead of a tab
 ```
+
 - `ansible-playbook <filename>.yml`
 - `ansible web -a "systemctl status nginx"` checks the status 
 
@@ -737,6 +738,105 @@ For more details to commands, go ![here](https://www.unixarena.com/2018/07/ansib
 - `scp -i /home/manse/Sparta/103-Ansible/.vagrant/machines/controller/virtualbox/private_key -r code vagrant@192.168.56.10:~` 
 
 
+- Ansible Start an EC2 Instance 
+
+- Make new VM
+- Set Up Controller in Hybrid infrastructure from on prim to public
+- Install requirements
+  - update/upgrade
+  - tree
+  - ansible (`sudo apt-add-repository --yes --update ppa:ansible/ansible`)
+  - python3
+  - pip3 (python3-pip)
+  - awscli
+  
+  - Set alias for python
+  - `alias python=python3`
+
+  - setup ansible bault
+  - aws access and secret keys
+  - create a file.yml to store aws keys
+  - chmod 600 file.yml
+
+  - `ansible db -m ping --ask-vault-pass`
+  - Require password for on-prem to public `--ask-vault-pass`
+
+##### Creating a new controller
+  sudo apt-get install update
+  sudo apt-get install upgrade
+  sudo apt-get install tree
+  sudo apt-add-repository --yes --update ppa:ansible/ansible
+  sudo apt-get install ansible
+  sudo apt-get install python3-pip
+  pip3 install boto boto3 awscli
+
+- go to/create `cd /etc/ansible/group_var/all/`
+- create a new file called `key.yml`
+- inside, put this:
+```
+aws_access_key:
+aws_secret_key:
+```
+
+- Start the EC2 instance once everything has been done
+- `sudo ansible-playbook launch.yml --connection=local --tags=ec2-create -e "ansible_python_interpreter=/usr/local/bin/python3" --ask-vault-pass`
+
+
+```
+---
+- hosts: localhost
+  connection: local
+  gather_facts: yes
+  vars:
+    key_name: eng103a
+    region: eu-west-1
+    image: ami-07d8796a2b0f8d29c
+    id: "eng103a_vlad_ansible_instance69"
+    sec_group: "{{ id }}-sec"
+  tasks:
+    - name: Provisioning EC2 instances
+      block:
+      - name: Upload public key to AWS
+        ec2_key:
+          name: "{{ key_name }}"
+          key_material: "{{ lookup('file', '/home/vagrant/.ssh/eng103a.pub') }}"
+          region: "{{ region }}"
+          aws_access_key: ""
+          aws_secret_key: ""
+      - name: Create security group
+        tags: create_ec2
+        ec2_group:
+          name: "{{ sec_group }}"
+          description: "Sec group for app {{ id }}"
+          region: "{{ region }}"
+          aws_access_key: ""
+          aws_secret_key: ""
+          rules:
+            - proto: tcp
+              ports:
+                - 22
+              cidr_ip: 0.0.0.0/0
+              rule_desc: allow all on ssh port
+        register: result_sec_group
+      - name: Provision instance(s)
+        ec2:
+          aws_access_key: ""
+          aws_secret_key: ""
+          key_name: "{{ key_name }}"
+          id: "{{ id }}"
+          group_id: "{{ result_sec_group.group_id }}"
+          image: "{{ image }}"
+          instance_type: t2.micro
+          region: "{{ region }}"
+          wait: true
+          count: 1
+      tags: ['never', 'create_ec2']
 
 
 
+
+
+```
+
+- Once the machine is up, add it to /etc/ansible/hosts
+- And run a ping `sudo ansible aws -m ping --ask-vault-pass`
